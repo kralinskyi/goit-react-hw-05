@@ -1,50 +1,33 @@
-import { Component } from 'react';
 import css from './Searchbar.module.css';
+import PropTypes from 'prop-types';
+import ButtonClear from 'components/ButtonClear/ButtonClear';
 
-export class Searchbar extends Component {
-  state = {
-    search: '',
-  };
+const Searchbar = ({ onSubmit, onChange, onClickClear, inputValue }) => (
+  <header className={css.searchBar}>
+    <form className={css.searchForm} onSubmit={onSubmit}>
+      <button type="submit" className={css.searchFormButton}>
+        <span className={css.searchFormButtonLabel}>Search</span>
+      </button>
+      <input
+        className={css.searchFormInput}
+        type="text"
+        name="query"
+        autoComplete="off"
+        autoFocus
+        placeholder="Search images and photos"
+        onChange={onChange}
+        value={inputValue}
+      />
+      {inputValue && <ButtonClear onClickClear={onClickClear} />}
+    </form>
+  </header>
+);
 
-  onChangeInput = evt => {
-    const { name, value } = evt.currentTarget;
-    this.setState({ [name]: value });
-  };
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func,
+  onChange: PropTypes.func,
+  onClickClear: PropTypes.func,
+  query: PropTypes.string,
+};
 
-  resetForm = () => {
-    this.setState({ search: '' });
-  };
-
-  render() {
-    return (
-      <header className={css.searchbar}>
-        <form
-          onSubmit={evt => {
-            evt.preventDefault();
-
-            if (!this.state.search) {
-              return 'Enter text for search.';
-            }
-
-            this.props.handleSubmit(this.state.search);
-            this.resetForm();
-          }}
-          className={css.Form}
-        >
-          <button type="submit" className={css.Button}></button>
-
-          <input
-            value={this.state.search}
-            onChange={this.onChangeInput}
-            className={css.Input}
-            name="search"
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-          />
-        </form>
-      </header>
-    );
-  }
-}
+export default Searchbar;

@@ -1,115 +1,112 @@
-import { Component } from 'react';
-import { ImageGallery } from './ImageGallery/ImageGallery';
-import { getSearch } from 'api/getSearch';
-import { Searchbar } from './Searchbar/Searchbar';
-import { Button } from 'components/Button/Button';
-import { Loader } from 'components/Loader/Loader';
-import { Modal } from './Modal/Modal';
+import { useState, useEffect } from 'react';
+import fetchImages from 'services/api';
+import '../index.css';
+import Searchbar from './Searchbar/Searchbar';
+import Section from './Section/Section';
+import ImageGallery from './ImageGallery/ImageGallery';
+import ButtonLoadMore from './ButtonLoadMore/ButtonLoadMore';
+import Modal from './Modal/Modal';
+import Loader from './Loader/Loader';
 
-export class App extends Component {
-  state = {
-    search: '',
-    images: [],
-    page: 1,
-    total: 1,
-    loading: false,
-    error: null,
+const App = () => {
+  const [inputValue, setInputValue] = useState('');
+  const [query, setQuery] = useState('');
+  const [page, setPage] = useState(0);
+  const [images, setImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [lastPage, setLastPage] = useState(0);
+  const [error, setError] = useState(null);
+  const [modal, setModal] = useState({
     showModal: false,
-    empty: false,
+    largeImageURL: '',
+  });
+  const [noResults, setNoResults] = useState(false);
+
+  const handleChange = event => {
+    setInputValue(event.target.value);
   };
 
-  componentDidUpdate(_, PrevState) {
-    if (
-      PrevState.search !== this.state.search ||
-      PrevState.page !== this.state.page
-    ) {
-      this.getFunc(this.state.search, this.state.page);
+  const onClickClear = () => {
+    setInputValue('');
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    if (inputValue === '') {
+      alert('Please enter your query');
+      return;
     }
-  }
 
-  getFunc = (text, page) => {
-    this.setState({ loading: true });
-
-    getSearch(text, page)
-      .then(resp => resp.json())
-      .then(data => {
-        if (data.hits.length === 0) {
-          this.setState({ empty: true });
-        }
-        this.setState(prevSt => ({
-          page: prevSt.page,
-          images: [...prevSt.images, ...data.hits],
-          total: data.total,
-        }));
-      })
-      .catch(error => {
-        this.setState({ error: error.message });
-      })
-      .finally(() => {
-        this.setState({ loading: false });
-      });
+    if (query === inputValue) return;
+    setImages([]);
+    setQuery(inputValue);
+    setPage(1);
   };
 
-  clickLoad = () => {
-    this.setState(prevSt => ({
-      page: prevSt.page + 1,
-    }));
+  const handleLoadMore = () => {
+    setPage(prevState => prevState + 1);
   };
 
-  openModal = (largeImageURL, alt) => {
-    this.setState(({ showModal }) => {
-      return { showModal: !showModal, largeImageURL, alt };
-    });
+  const toggleModal = () => {
+    setModal(prevState => ({ ...prevState, showModal: !prevState.showModal }));
   };
 
-  handleSubmit = search => {
-    this.setState({
-      search,
-      images: [],
-      page: 1,
-      total: 1,
-      loading: false,
-      error: null,
-      empty: false,
-    });
+  const handleImageClick = largeImageURL => {
+    setModal(prevState => ({ ...prevState, largeImageURL }));
+    toggleModal();
   };
 
-  closeModal = () => {
-    this.setState(({ showModal }) => {
-      return { showModal: !showModal };
-    });
-  };
+  useEffect(() => {
+    if (page === 0) return;
 
-  render() {
-    const { error, loading, images, total, page } = this.state;
-    return (
-      <div>
-        <Searchbar handleSubmit={this.handleSubmit} />
+    const fetchImagesByQuery = async searchQuery => {
+      setIsLoading(true);
+      setError(null);
+      setNoResults(false);
 
-        {error && (
-          <h2 style={{ textAlign: 'center' }}>
-            Something went wrong: ({error})!
-          </h2>
-        )}
+      try {
+        const response = await fetchImages(searchQuery, page);
+        setImages(prevState => [...prevState, ...response.hits]);
+        setLastPage(Math.ceil(response.totalHits / 12));
+        response.totalHits === 0 && setNoResults(true);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-        <ImageGallery togleModal={this.openModal} images={images} />
+    fetchImagesByQuery(query);
+  }, [page, query]);
 
-        {loading && <Loader />}
+  return (
+    <div className={App}>
+      <Searchbar
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+        onClickClear={onClickClear}
+        inputValue={inputValue}
+      />
+      <Section>
+        {error && <p>Something went wrong: {error.message}</p>}
 
-        {this.state.empty && (
-          <h2 style={{ textAlign: 'center' }}>
-            Sorry. There are no images ... 😭
-          </h2>
-        )}
+        {noResults && <p className="alertStyle">No results found</p>}
 
-        {total / 12 > page && <Button clickLoad={this.clickLoad} />}
+        {isLoading && <Loader />}
+        <ImageGallery images={images} onImageClick={handleImageClick} />
+      </Section>
 
-        {this.state.showModal && (
-          <Modal closeModal={this.closeModal}>
-            <img src={this.state.largeImageURL} alt={this.state.alt} />
-          </Modal>
-        )}
-      </div>
-    );
-  }
-}
+      {page < lastPage && !isLoading ? (
+        <ButtonLoadMore label="Load more" handleLoadMore={handleLoadMore} />
+      ) : (
+        <div style={{ height: 40 }}></div>
+      )}
+
+      {modal.showModal && (
+        <Modal onClose={toggleModal} largeImageURL={modal.largeImageURL} />
+      )}
+    </div>
+  );
+};
+
+export default App;
