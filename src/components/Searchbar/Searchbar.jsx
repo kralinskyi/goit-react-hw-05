@@ -1,6 +1,4 @@
 import { Component } from 'react';
-import { toast } from 'react-hot-toast';
-import { BiSearch } from 'react-icons/bi';
 import css from './Searchbar.module.css';
 
 export class Searchbar extends Component {
@@ -25,7 +23,7 @@ export class Searchbar extends Component {
             evt.preventDefault();
 
             if (!this.state.search) {
-              return toast.error('Enter text for search.');
+              return 'Enter text for search.';
             }
 
             this.props.handleSubmit(this.state.search);
@@ -33,9 +31,7 @@ export class Searchbar extends Component {
           }}
           className={css.Form}
         >
-          <button type="submit" className={css.Button}>
-            <BiSearch size="20" />
-          </button>
+          <button type="submit" className={css.Button}></button>
 
           <input
             value={this.state.search}

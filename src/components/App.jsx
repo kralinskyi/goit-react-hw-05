@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { Toaster } from 'react-hot-toast';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { getSearch } from 'api/getSearch';
 import { Searchbar } from './Searchbar/Searchbar';
@@ -85,12 +84,6 @@ export class App extends Component {
     const { error, loading, images, total, page } = this.state;
     return (
       <div>
-        <Toaster
-          toastOptions={{
-            duration: 1500,
-          }}
-        />
-
         <Searchbar handleSubmit={this.handleSubmit} />
 
         {error && (
