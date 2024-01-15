@@ -1,21 +1,49 @@
-import css from './ImageGalleryItem.module.css';
-import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import './ImageGalleryItem.css';
+import Modal from 'components/Modal';
+import { createPortal } from 'react-dom';
 
-const ImageGalleryItem = ({ webformatURL, largeImageURL, onImageClick }) => (
-  <li className={css.imageGalleryItem}>
-    <img
-      src={webformatURL}
-      alt=""
-      className={css.imageGalleryItemImage}
-      onClick={() => onImageClick(largeImageURL)}
-    />
-  </li>
-);
+const ImageGalleryItem = ({ image }) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const { webformatURL, largeImageURL } = image;
 
-ImageGalleryItem.propTypes = {
-  webformatURL: PropTypes.string,
-  largeImageURL: PropTypes.string,
-  onImageClick: PropTypes.func,
+  useEffect(() => {
+    const keyEscDown = evt => {
+      if (evt.code === 'Escape' && modalIsOpen) {
+        closeModal();
+      }
+    };
+
+    window.addEventListener('keydown', keyEscDown);
+    return () => {
+      window.removeEventListener('keydown', keyEscDown);
+    };
+  }, [modalIsOpen]);
+
+  const closeModal = () => {
+    setModalIsOpen(prev => !prev);
+  };
+
+  return (
+    <>
+      <li className="gallery-item">
+        <img
+          loading="lazy"
+          src={webformatURL}
+          alt={webformatURL}
+          className="gallery-item-image "
+          onClick={() => closeModal()}
+        />
+      </li>
+      {modalIsOpen &&
+        // перевірка чи є елемент для відображення модалки
+        document.getElementById('modal-root') &&
+        createPortal(
+          <Modal onClick={closeModal} url={largeImageURL} />,
+          document.getElementById('modal-root')
+        )}
+    </>
+  );
 };
 
 export default ImageGalleryItem;
