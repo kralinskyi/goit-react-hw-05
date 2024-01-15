@@ -64,7 +64,7 @@ const App = () => {
         setShowLoadMore(false);
         Notify.warning(`That was all results..`);
       } else {
-        setShowLoadMore(true); // Додав цей рядок
+        setShowLoadMore(true);
       }
     } catch (error) {
       console.log(error);
