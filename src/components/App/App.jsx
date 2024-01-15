@@ -1,5 +1,5 @@
 import Searchbar from 'components/Searchbar';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ImageGallery from 'components/ImageGallery';
 import PixabayApi from 'components/Api/Api';
 import Button from 'components/Button/Button';
