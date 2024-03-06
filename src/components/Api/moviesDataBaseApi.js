@@ -1,15 +1,14 @@
 // Api key = "d69ae57d4f26a7687d15f572102be872"
 import axios from "axios";
 
-// const url =
-//   "https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1";
+axios.defaults.baseURL = "https://api.themoviedb.org/3";
 
-export default async function fetchMovies(page) {
+export default async function fetchMovies() {
   const options = {
     params: {
       include_adult: false,
       language: "en-US",
-      page,
+      page: 1,
     },
     headers: {
       Authorization:
@@ -17,10 +16,7 @@ export default async function fetchMovies(page) {
     },
   };
 
-  const { data } = await axios.get(
-    "https://api.themoviedb.org/3/trending/movie/day",
-    options
-  );
+  const { data } = await axios.get("/trending/movie/day", options);
 
   return data.results;
 }

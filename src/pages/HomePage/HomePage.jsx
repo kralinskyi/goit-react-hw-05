@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import MovieList from "../../components/MovieList/MovieList";
-import fetchMovies from "../../components/Api/hmdbApi";
+import fetchMovies from "../../components/Api/moviesDataBaseApi";
+import css from "./HomePage.module.css";
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(1);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -13,7 +13,7 @@ export default function HomePage() {
       try {
         setIsLoading(true);
         setError(null);
-        const popularMovies = await fetchMovies(page);
+        const popularMovies = await fetchMovies();
         setMovies(popularMovies);
       } catch (error) {
         setError(true);
@@ -23,17 +23,19 @@ export default function HomePage() {
     }
 
     getPopularMovies();
-  }, [page]);
+  }, []);
 
   return (
     <>
-      <h1>Welcome! Popular movies here!</h1>
       {isLoading ? (
         <p>Loading...</p>
       ) : error ? (
         <p>Error: {error.message}</p>
       ) : (
-        <MovieList movies={movies} />
+        <>
+          <h1 className={css.title}>Trending today</h1>
+          <MovieList movies={movies} />
+        </>
       )}
     </>
   );

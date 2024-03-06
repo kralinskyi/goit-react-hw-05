@@ -1,0 +1,16 @@
+.image_container {
+  padding: 10px;
+  align-self: center;
+}
+
+.poster {
+  width: 160px;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  border-bottom: 1px blue solid;
+  gap: 10px;
+}
