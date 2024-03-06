@@ -1,0 +1,9 @@
+.back {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background-color: ghostwhite;
+  margin: 5px;
+}

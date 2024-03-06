@@ -3,6 +3,7 @@ import css from "./MovieDetailsPage.module.css";
 import { useEffect, useState } from "react";
 import { fetchMovie } from "../../components/Api/moviesDataBaseApi";
 import Loader from "../../components/Loader/Loader";
+import BackToHomePageLink from "../../components/BackToHomePageLink/BackToHomePageLink";
 
 export default function MovieDetailsPage() {
   const [error, setError] = useState(null);
@@ -28,6 +29,7 @@ export default function MovieDetailsPage() {
 
   return (
     <>
+      <BackToHomePageLink />
       <div className={css.center}>{isLoading && <Loader />}</div>
 
       {error && <p>Something wrong...</p>}
