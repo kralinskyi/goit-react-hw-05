@@ -7,7 +7,7 @@ export default function MovieList({ movies }) {
       <ul className={css["movie-list"]}>
         {movies.map((movie) => (
           <li key={movie.id} className={css.item}>
-            <Link to="/details" className={css.link}>
+            <Link to={`/${movie.id}`} className={css.link}>
               <div className={css.image_container}>
                 <img
                   className={css.poster}

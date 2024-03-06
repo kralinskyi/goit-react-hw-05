@@ -12,8 +12,8 @@ export default function App() {
       <Navigation />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/movies" element={<MoviesPage />}></Route>
-        <Route path="/details/:id" element={<MovieDetailsPage />}></Route>
+        <Route path="/:movieId" element={<MovieDetailsPage />} />
+        <Route path="/movies" element={<MoviesPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>

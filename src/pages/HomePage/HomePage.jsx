@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import MovieList from "../../components/MovieList/MovieList";
-import fetchMovies from "../../components/Api/moviesDataBaseApi";
+import { fetchMovies } from "../../components/Api/moviesDataBaseApi";
 import css from "./HomePage.module.css";
+import Loader from "../../components/Loader/Loader";
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
@@ -27,16 +28,12 @@ export default function HomePage() {
 
   return (
     <>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>Error: {error.message}</p>
-      ) : (
-        <>
-          <h1 className={css.title}>Trending today</h1>
-          <MovieList movies={movies} />
-        </>
-      )}
+      <div className={css.center}>{isLoading && <Loader />}</div>
+      {error && <p>Error: {error.message}</p>}
+      <>
+        {!isLoading && !error && <h1 className={css.title}>Trending today</h1>}
+        <MovieList movies={movies} />
+      </>
     </>
   );
 }
