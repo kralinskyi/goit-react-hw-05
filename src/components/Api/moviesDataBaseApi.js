@@ -21,6 +21,5 @@ export async function fetchMovies() {
 
 export async function fetchMovie(id) {
   const { data } = await axios.get(`/movie/${id}`, options);
-  console.log(data);
   return data;
 }
