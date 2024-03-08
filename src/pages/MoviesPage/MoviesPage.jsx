@@ -4,8 +4,6 @@ import { fetchMovies } from "../../components/Api/moviesDataBaseApi";
 import Loader from "../../components/Loader/Loader";
 import css from "./MoviesPage.module.css";
 
-// https://api.themoviedb.org/3/search/movie
-
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);

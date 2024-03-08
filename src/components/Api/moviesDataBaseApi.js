@@ -1,4 +1,3 @@
-// Api key = "d69ae57d4f26a7687d15f572102be872"
 import axios from "axios";
 
 axios.defaults.baseURL = "https://api.themoviedb.org/3";
@@ -22,4 +21,9 @@ export async function fetchMovies() {
 export async function fetchMovie(id) {
   const { data } = await axios.get(`/movie/${id}`, options);
   return data;
+}
+
+export async function fetchMovieCredits(id) {
+  const { data } = await axios.get(`/movie/${id}/credits`, options);
+  return data.cast;
 }

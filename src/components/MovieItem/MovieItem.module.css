@@ -1,0 +1,57 @@
+.movie {
+  display: flex;
+  border-top: 1px dotted brown;
+  border-bottom: 1px dotted brown;
+
+  gap: 5px;
+}
+
+.image_container {
+  padding: 5px;
+  align-self: center;
+  border-right: 1px dotted brown;
+}
+
+.poster {
+  width: 320px;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  border-bottom: 1px blue solid;
+  gap: 10px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.production {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  & img {
+    width: 100px;
+    margin-bottom: 10px;
+  }
+}
+
+.link_to_homepage:hover {
+  text-decoration: underline;
+  color: inherit;
+}
+
+.extra_info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  & :hover {
+    text-decoration: underline;
+    color: inherit;
+  }
+}
