@@ -1,4 +1,4 @@
-import ReviewCard from "../../ReviewCard/ReviewCard";
+import ReviewCard from "../ReviewCard/ReviewCard";
 import css from "./ReviewsGallery.module.css";
 
 export default function ReviewsGallery({ reviews }) {

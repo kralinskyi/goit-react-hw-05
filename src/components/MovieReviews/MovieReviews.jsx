@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { fetchMovieReview } from "../Api/moviesDataBaseApi";
 import Loader from "../Loader/Loader";
 import css from "./MovieReviews.module.css";
-import ReviewsGallery from "../MovieCast/ReviewsGallery/ReviewsGallery";
+import ReviewsGallery from "../ReviewsGallery/ReviewsGallery";
 
 export default function MovieReviews() {
   const [error, setError] = useState(null);

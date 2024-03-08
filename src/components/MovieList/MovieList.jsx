@@ -1,5 +1,5 @@
 import css from "./MovieList.module.css";
-import MovieListElement from "./MovieListElement/MovieListElement";
+import MovieListElement from "../MovieListElement/MovieListElement";
 
 export default function MovieList({ movies }) {
   return (
