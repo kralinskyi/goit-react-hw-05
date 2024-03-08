@@ -4,3 +4,8 @@
 .subtitle_container {
   margin: 10px;
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+}

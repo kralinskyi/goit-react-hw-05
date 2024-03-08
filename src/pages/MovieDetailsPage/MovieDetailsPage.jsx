@@ -43,9 +43,7 @@ export default function MovieDetailsPage() {
             <h2 className={css.subtitle}>Additional information:</h2>
           </div>
           <AdditionalInfo />
-          <div>
-            <Outlet />
-          </div>
+          <Outlet />
         </>
       )}
     </>

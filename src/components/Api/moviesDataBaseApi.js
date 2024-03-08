@@ -27,3 +27,8 @@ export async function fetchMovieCredits(id) {
   const { data } = await axios.get(`/movie/${id}/credits`, options);
   return data.cast;
 }
+
+export async function fetchMovieReview(id) {
+  const { data } = await axios.get(`/movie/${id}/reviews`, options);
+  return data.results;
+}

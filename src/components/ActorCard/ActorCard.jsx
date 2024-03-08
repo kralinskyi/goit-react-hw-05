@@ -13,7 +13,9 @@ export default function ActorCard({ data }) {
         className={css.actor_photo}
       />
       <p>
-        Name: {data.name} as {data.character}
+        {data.name}
+        <br />
+        as {data.character}
       </p>
     </li>
   );
