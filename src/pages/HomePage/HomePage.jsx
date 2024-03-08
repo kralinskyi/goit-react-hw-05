@@ -29,7 +29,7 @@ export default function HomePage() {
   return (
     <>
       <div className={css.center}>{isLoading && <Loader />}</div>
-      {error && <p>Error: {error.message}</p>}
+      {error && <p>Something wrong...</p>}
       <>
         {!isLoading && !error && <h1 className={css.title}>Trending today</h1>}
         <MovieList movies={movies} />

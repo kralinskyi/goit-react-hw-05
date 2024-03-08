@@ -6,4 +6,9 @@
   gap: 5px;
   background-color: ghostwhite;
   margin: 5px;
+
+  :hover {
+    text-decoration: underline;
+    color: inherit;
+  }
 }

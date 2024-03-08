@@ -4,8 +4,8 @@ import css from "./BackToHomePageLink.module.css";
 
 export default function BackToHomePageLink() {
   return (
-    <div>
-      <Link to="/" className={css.back}>
+    <div className={css.back}>
+      <Link to="/">
         <IoMdArrowRoundBack /> Back to home page
       </Link>
     </div>

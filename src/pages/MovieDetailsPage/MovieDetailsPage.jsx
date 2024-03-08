@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import css from "./MovieDetailsPage.module.css";
 import { useEffect, useState } from "react";
 import { fetchMovie } from "../../components/Api/moviesDataBaseApi";
@@ -82,12 +82,23 @@ export default function MovieDetailsPage() {
                 <a
                   href={movie.homepage}
                   target="_blank"
-                  rel="noopener noreferrer">
+                  rel="noopener noreferrer"
+                  className={css.link_to_homepage}>
                   Movie home page
                 </a>
               </div>
             </div>
           </div>
+          <ul className={css.extra_info}>
+            <li>
+              <NavLink to="cast">Cast info</NavLink>
+            </li>
+            <li>
+              <NavLink to="reviews">Reviews</NavLink>
+            </li>
+          </ul>
+
+          {/* <Outlet /> */}
         </>
       )}
     </>

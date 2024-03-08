@@ -1,5 +1,7 @@
 .movie {
   display: flex;
+  border-top: 2px dotted brown;
+  border-bottom: 2px dotted brown;
 
   gap: 5px;
 }
@@ -7,6 +9,7 @@
 .image_container {
   padding: 5px;
   align-self: center;
+  border-right: 2px dotted brown;
 }
 
 .poster {
@@ -34,5 +37,21 @@
   & img {
     width: 100px;
     margin-bottom: 10px;
+  }
+}
+
+.link_to_homepage:hover {
+  text-decoration: underline;
+  color: inherit;
+}
+
+.extra_info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  & :hover {
+    text-decoration: underline;
+    color: inherit;
   }
 }
