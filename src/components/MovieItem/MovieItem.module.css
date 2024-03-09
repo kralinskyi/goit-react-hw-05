@@ -12,6 +12,10 @@
   border-right: 1px dotted brown;
 }
 
+.title {
+  font-size: 30px;
+}
+
 .poster {
   width: 320px;
 }

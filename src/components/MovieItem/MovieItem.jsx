@@ -34,7 +34,7 @@ export default function MovieItem({ movie }) {
               {movie.genres.map((genre) => genre.name).join(", ")}
             </p>
             <div className={css.production}>
-              {movie.production_companies[0].logo_path && (
+              {!movie.production_companies.logo_path && (
                 <b>Production companies:</b>
               )}
               {movie.production_companies.map((company) => (
