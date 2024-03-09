@@ -1,6 +1,6 @@
 import { Outlet, useParams } from "react-router-dom";
 import css from "./MovieDetailsPage.module.css";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { fetchMovie } from "../../components/Api/moviesDataBaseApi";
 import Loader from "../../components/Loader/Loader";
 
@@ -42,7 +42,9 @@ export default function MovieDetailsPage() {
             <h2 className={css.subtitle}>Additional information:</h2>
           </div>
           <AdditionalInfo />
-          <Outlet />
+          <Suspense fallback={null}>
+            <Outlet />
+          </Suspense>
         </>
       )}
     </>
