@@ -3,7 +3,7 @@ import css from "./MovieDetailsPage.module.css";
 import { useEffect, useState } from "react";
 import { fetchMovie } from "../../components/Api/moviesDataBaseApi";
 import Loader from "../../components/Loader/Loader";
-import BackToHomePageLink from "../../components/BackToHomePageLink/BackToHomePageLink";
+
 import MovieItem from "../../components/MovieItem/MovieItem";
 import AdditionalInfo from "../../components/AdditionalInfo/AdditionalInfo";
 
@@ -37,7 +37,6 @@ export default function MovieDetailsPage() {
 
       {movie && (
         <>
-          <BackToHomePageLink />
           <MovieItem movie={movie} />
           <div className={css.subtitle_container}>
             <h2 className={css.subtitle}>Additional information:</h2>

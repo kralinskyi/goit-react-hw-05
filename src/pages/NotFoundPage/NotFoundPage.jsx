@@ -1,4 +1,4 @@
-import BackToHomePageLink from "../../components/BackToHomePageLink/BackToHomePageLink";
+import BackToHomePageLink from "../../components/GoBackLink/GoBackLink";
 
 export default function NotFoundPage() {
   return (
