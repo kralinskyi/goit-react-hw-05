@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
+import { Toaster } from "react-hot-toast";
 
 // import MovieCast from "./components/MovieCast/MovieCast";
 // import MovieReviews from "./components/MovieReviews/MovieReviews";
@@ -20,6 +21,7 @@ export default function App() {
   return (
     <>
       <Navigation />
+      <Toaster />
 
       <Suspense fallback={null}>
         <Routes>

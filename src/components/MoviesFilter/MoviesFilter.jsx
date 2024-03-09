@@ -27,6 +27,7 @@
 
 import { useSearchParams } from "react-router-dom";
 import css from "./MoviesFilter.module.css";
+import toast from "react-hot-toast";
 
 export default function MoviesFilter({ onSubmit }) {
   const [params, setParams] = useSearchParams();
@@ -38,7 +39,13 @@ export default function MoviesFilter({ onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const searchValue = e.target.query.value;
+    const searchValue = e.target.query.value.trim();
+
+    if (searchValue === "") {
+      toast("Please, enter movie title for searching!");
+
+      return;
+    }
 
     findMoviesByTitle(searchValue);
     onSubmit(searchValue);
