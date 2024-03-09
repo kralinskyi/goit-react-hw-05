@@ -54,7 +54,9 @@ export default function MoviesFilter({ onSubmit }) {
   return (
     <form className={css.input} onSubmit={handleSubmit}>
       <input placeholder="find movie by name" name="query" />
-      <button type="submit">Find</button>
+      <button type="submit" className={css.search}>
+        Find
+      </button>
     </form>
   );
 }
