@@ -31,6 +31,9 @@ export default function MovieCast() {
     <>
       {<div className={css.center}>{isLoading && <Loader />}</div>}
       {error && <p>Something wrong...</p>}
+      {actors.length === 0 && !isLoading && !error && (
+        <p>No information available about the movie cast.</p>
+      )}
       <ActorsGallery data={actors} />
     </>
   );
