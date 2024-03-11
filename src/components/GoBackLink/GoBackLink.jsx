@@ -5,12 +5,11 @@ import { useRef } from "react";
 
 export default function GoBackLink() {
   const location = useLocation();
-  const goBack = useRef(location.state?.from ?? "/");
-  console.log(goBack.current);
+  const goBack = useRef(location.state);
 
   return (
     <div className={css.back}>
-      <Link to={goBack.current}>
+      <Link to={goBack.current?.from ?? "/"}>
         <IoMdArrowRoundBack /> Go back
       </Link>
     </div>
