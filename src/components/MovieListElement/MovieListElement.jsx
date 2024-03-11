@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import css from "./MovieListElement.module.css";
 
 export default function MovieListElement({ movie, state }) {
+  if (!movie.poster_path) {
+    return null; // Якщо poster_path відсутній, повертаємо null
+  }
+
   return (
     <li className={css.item}>
       <Link to={`/${movie.id}`} className={css.link} state={state}>
