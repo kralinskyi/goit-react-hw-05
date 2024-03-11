@@ -3,13 +3,11 @@ import MovieList from "../../components/MovieList/MovieList";
 import { fetchMovies } from "../../components/Api/moviesDataBaseApi";
 import css from "./HomePage.module.css";
 import Loader from "../../components/Loader/Loader";
-import { useLocation } from "react-router-dom";
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     async function getPopularMovies() {
@@ -34,7 +32,7 @@ export default function HomePage() {
       {error && <p>Something wrong...</p>}
       <>
         {!isLoading && !error && <h1 className={css.title}>Trending today</h1>}
-        <MovieList movies={movies} state={location} />
+        <MovieList movies={movies} />
       </>
     </>
   );
