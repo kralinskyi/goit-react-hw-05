@@ -1,10 +1,10 @@
-import GoBackLink from "../../components/GoBackLink/GoBackLink";
+import { Link } from "react-router-dom";
 
 export default function NotFoundPage() {
   return (
     <>
       <p>Page not found...</p>
-      <GoBackLink />
+      <Link to="/">Go to home page</Link>
     </>
   );
 }
